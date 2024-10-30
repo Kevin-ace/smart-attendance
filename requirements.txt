@@ -1,0 +1,12 @@
+# Install the necessary packages
+fastapi
+uvicorn
+bcrypt
+pyjwt
+sqlalchemy
+pydantic
+asyncpg
+psycopg2
+pydantic[email]
+passlib
+python-jose
