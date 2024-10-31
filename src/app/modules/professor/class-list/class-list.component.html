@@ -1,0 +1,53 @@
+<div class="class-list-container">
+    <div class="header">
+      <h2>My Classes</h2>
+      <button (click)="showAddForm = true" class="add-btn">
+        <i class="fas fa-plus"></i> Add New Class
+      </button>
+    </div>
+  
+    <div class="class-grid">
+      <div *ngFor="let class of classes" class="class-card">
+        <div class="class-header">
+          <h3>{{class.name}}</h3>
+          <span class="code">{{class.code}}</span>
+        </div>
+        <div class="class-info">
+          <p><i class="fas fa-clock"></i> {{class.schedule}}</p>
+          <p><i class="fas fa-users"></i> {{class.totalStudents}} Students</p>
+        </div>
+        <div class="class-actions">
+          <button routerLink="../qr-generator" [queryParams]="{classId: class.id}">
+            Generate QR
+          </button>
+          <button routerLink="../attendance" [queryParams]="{classId: class.id}">
+            View Attendance
+          </button>
+        </div>
+      </div>
+    </div>
+  
+    <div *ngIf="showAddForm" class="modal">
+      <div class="modal-content">
+        <h3>Add New Class</h3>
+        <form [formGroup]="classForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label>Class Name</label>
+            <input type="text" formControlName="name">
+          </div>
+          <div class="form-group">
+            <label>Class Code</label>
+            <input type="text" formControlName="code">
+          </div>
+          <div class="form-group">
+            <label>Schedule</label>
+            <input type="text" formControlName="schedule">
+          </div>
+          <div class="modal-actions">
+            <button type="button" (click)="showAddForm = false">Cancel</button>
+            <button type="submit" [disabled]="!classForm.valid">Add Class</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
